@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - 找不到页面</title>
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1f1f1f;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            animation: glitch 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        }
+
+        h1 {
+            font-size: 6em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        p {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        @keyframes glitch {
+            2%, 64% {
+                transform: translate(2px, 0) skewX(0deg);
+            }
+            4%, 60% {
+                transform: translate(-2px, 0) skewX(0deg);
+            }
+            62% {
+                transform: translate(0, 0) skewX(5deg);
+            }
+        }
+
+        .code {
+            font-size: 1.5em;
+            margin-top: 20px;
+            background-color: #333333;
+            padding: 10px 20px;
+            display: inline-block;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .link {
+            margin-top: 40px;
+            font-size: 1.2em;
+            text-decoration: none;
+            color: #7289DA;
+            transition: color 0.3s;
+        }
+
+        .link:hover {
+            color: #5f73a1;
+        }
+
+        /* Glitch text effect */
+        .glitch:before, .glitch:after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip: rect(0, 1000px, 0, 0);
+            overflow: hidden;
+        }
+
+        .glitch:before {
+            left: 2px;
+            text-shadow: -2px 0 #e91e63;
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+
+        .glitch:after {
+            left: -2px;
+            text-shadow: -2px 0 #4caf50;
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0%, 100% {
+                clip: rect(8px, 9999px, 22px, 0);
+            }
+            2%, 64% {
+                clip: rect(67px, 9999px, 94px, 0);
+            }
+            4%, 60% {
+                clip: rect(9px, 9999px, 32px, 0);
+            }
+            62% {
+                clip: rect(77px, 9999px, 13px, 0);
+            }
+        }
+
+        @keyframes glitch-anim-2 {
+            0%, 100% {
+                clip: rect(54px, 9999px, 26px, 0);
+            }
+            2%, 64% {
+                clip: rect(86px, 9999px, 95px, 0);
+            }
+            4%, 60% {
+                clip: rect(31px, 9999px, 58px, 0);
+            }
+            62% {
+                clip: rect(36px, 9999px, 73px, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="glitch" data-text="404">404</h1>
+        <p>找不到页面</p>
+        <p class="code">错误代码：404</p>
+        <a href="https://moyoshibot.netlify.app/" class="link">返回主页</a>
+    </div>
+</body>
+</html>

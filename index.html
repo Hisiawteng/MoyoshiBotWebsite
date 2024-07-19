@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moyoshi Bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #111;
+            color: #ddd;
+        }
+
+        header {
+            background: linear-gradient(90deg, #1e1e1e, #333);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #444;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #00ff99;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            display: block;
+            height: 3px;
+            background: #00ff99;
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 70vh;
+            background: url('https://source.unsplash.com/random/1920x1080') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .section {
+            padding: 60px 30px;
+            text-align: center;
+            background: #1c1c1c;
+        }
+
+        .section h2 {
+            font-size: 36px;
+            color: #00ff99;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h3 {
+            font-size: 24px;
+            color: #00ff99;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #ddd;
+        }
+
+        footer {
+            background: #111;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #444;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Moyoshi Bot</h1>
+    <nav>
+        <a href="#cooperation">合作</a>
+        <a href="#features">功能</a>
+        <a href="#support-us">支持我們</a>
+        <a href="#related-links">相關鏈接</a>
+        <a href="#about-us">關於我們</a>
+        <a href="https://moyoshibot.netlify.app/teams.html">MoyoshiBot團隊成員</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div>
+        <h2>探索 Moyoshi Bot</h2>
+        <p>引領潮流的 Discord 機器人技術</p>
+    </div>
+</section>
+
+<section id="cooperation" class="section">
+    <h2>合作</h2>
+    <p>我們開放合作機會，歡迎與各種項目合作，提供技術支持和解決方案。聯繫我們，探索更多合作可能性。</p>
+</section>
+
+<section id="features" class="section">
+    <h2>功能</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>創新功能</h3>
+            <p>我們的機器人提供獨特且強大的功能，滿足各種需求。</p>
+        </div>
+        <div class="card">
+            <h3>用戶友好</h3>
+            <p>界面直觀，操作簡便，提升用戶體驗。</p>
+        </div>
+        <div class="card">
+            <h3>高效能</h3>
+            <p>優化設計，能快速處理大量請求。</p>
+        </div>
+    </div>
+</section>
+
+<section id="support-us" class="section">
+    <h2>支持我們</h2>
+    <p>您的支持對我們非常重要。您可以通過捐款、反饋或分享來支持我們。</p>
+</section>
+
+<section id="related-links" class="section">
+    <h2>相關鏈接</h2>
+    <p>探索與我們相關的有用鏈接：</p>
+    <ul>
+        <li><a href="#" style="color: #00ff99;">官方網站</a></li>
+        <li><a href="#" style="color: #00ff99;">GitHub</a></li>
+        <li><a href="#" style="color: #00ff99;">Discord社群</a></li>
+    </ul>
+</section>
+
+<section id="about-us" class="section">
+    <h2>關於我們</h2>
+    <p>Moyoshi Bot 是一個專注於提供創新且高效能的 Discord 機器人服務的團隊。我們致力於開發前沿技術，為用戶帶來無與倫比的體驗。</p>
+</section>
+
+
+
+<footer>
+    <p>&copy; 2024 Moyoshi Bot. 保留所有權利。</p>
+</footer>
+
+</body>
+</html>
