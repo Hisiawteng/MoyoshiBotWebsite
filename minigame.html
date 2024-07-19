@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迷你遊戲</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #34495e;
+            padding: 20px;
+            text-align: center;
+            color: #ecf0f1;
+        }
+        main {
+            padding: 20px;
+        }
+        .game-container {
+            margin-bottom: 30px;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+        .tic-tac-toe {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 5px;
+            margin: 0 auto;
+        }
+        .tic-tac-toe div {
+            width: 100px;
+            height: 100px;
+            background-color: #ecf0f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            border: 2px solid #34495e;
+        }
+        .tic-tac-toe div.x {
+            color: #e74c3c;
+        }
+        .tic-tac-toe div.o {
+            color: #2ecc71;
+        }
+        .game-controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .game-controls button {
+            background-color: #1abc9c;
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        .game-controls button:hover {
+            background-color: #16a085;
+        }
+        .result {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+        .minesweeper-cell {
+            width: 30px;
+            height: 30px;
+            background-color: #ecf0f1;
+            border: 1px solid #34495e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .minesweeper-cell.clicked {
+            background-color: #2ecc71;
+        }
+        .minesweeper-cell.mine {
+            background-color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>迷你遊戲</h1>
+</header>
+
+<main>
+    <div class="game-container">
+        <h2>貪吃蛇</h2>
+        <canvas id="snakeCanvas" width="400" height="400"></canvas>
+        <div class="game-controls">
+            <button id="startSnake">開始遊戲</button>
+            <button id="stopSnake">結束遊戲</button>
+            <button id="restartSnake">重新開始</button>
+            <div id="snakeResult" class="result">得分: 0</div>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <h2>幸運方塊</h2>
+        <canvas id="luckyCanvas" width="400" height="400"></canvas>
+        <div class="game-controls">
+            <button id="startLucky">開始遊戲</button>
+            <button id="stopLucky">結束遊戲</button>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <h2>井字遊戲 (XOX) - 和 AI 對戰</h2>
+        <div id="ticTacToeGrid" class="tic-tac-toe"></div>
+        <div class="game-controls">
+            <button id="startTicTacToe">開始遊戲</button>
+            <button id="stopTicTacToe">結束遊戲</button>
+            <div id="ticTacToeResult" class="result"></div>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <h2>踩地雷</h2>
+        <div id="minesweeperGrid" style="display: grid; grid-template-columns: repeat(10, 30px); gap: 2px;"></div>
+        <div class="game-controls">
+            <button id="startMinesweeper">開始遊戲</button>
+            <button id="stopMinesweeper">結束遊戲</button>
+            <div id="minesweeperResult" class="result"></div>
+        </div>
+    </div>
+</main>
+
+<script>
+    // 貪吃蛇遊戲腳本
+    const canvas = document.getElementById('snakeCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let snake;
+    let direction;
+    let food;
+    let gridSize = 20;
+    let tileCount = canvas.width / gridSize;
+    let score = 0;
+    let snakeInterval;
+
+    function drawSnake() {
+        ctx.fillStyle = 'lime';
+        snake.forEach(part => ctx.fillRect(part.x * gridSize, part.y * gridSize, gridSize, gridSize));
+    }
+
+    function drawFood() {
+        ctx.fillStyle = 'red';
+        ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
+    }
+
+    function update() {
+        let head = { ...snake[0] };
+        if (direction === 'LEFT') head.x--;
+        if (direction === 'RIGHT') head.x++;
+        if (direction === 'UP') head.y--;
+        if (direction === 'DOWN') head.y++;
+
+        snake.unshift(head);
+
+        if (head.x === food.x && head.y === food.y) {
+            score++;
+            food = { x: Math.floor(Math.random() * tileCount), y: Math.floor(Math.random() * tileCount) };
+        } else {
+            snake.pop();
+        }
+
+        // 碰撞檢測
+        if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount || collision()) {
+            clearInterval(snakeInterval);
+            document.getElementById('snakeResult').innerText = `遊戲結束! 得分: ${score}`;
+        }
+    }
+
+    function collision() {
+        const head = snake[0];
+        for (let i = 1; i < snake.length; i++) {
+            if (head.x === snake[i].x && head.y === snake[i].y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawSnake();
+        drawFood();
+    }
+
+    function gameLoop() {
+        update();
+        draw();
+    }
+
+    function startSnakeGame() {
+        snake = [{ x: 10, y: 10 }];
+        direction = 'RIGHT';
+        food = { x: Math.floor(Math.random() * tileCount), y: Math.floor(Math.random() * tileCount) };
+        score = 0;
+        document.getElementById('snakeResult').innerText = `得分: ${score}`;
+        snakeInterval = setInterval(gameLoop, 100);
+    }
+
+    function stopSnakeGame() {
+        clearInterval(snakeInterval);
+        document.getElementById('snakeResult').innerText = `遊戲結束! 得分: ${score}`;
+    }
+
+    function restartSnakeGame() {
+        stopSnakeGame();
+        setTimeout(startSnakeGame, 500);
+    }
+
+    document.getElementById('startSnake').addEventListener('click', startSnakeGame);
+    document.getElementById('stopSnake').addEventListener('click', stopSnakeGame);
+    document.getElementById('restartSnake').addEventListener('click', restartSnakeGame);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'w' && direction !== 'DOWN') direction = 'UP';
+        if (e.key === 's' && direction !== 'UP') direction = 'DOWN';
+        if (e.key === 'a' && direction !== 'RIGHT') direction = 'LEFT';
+        if (e.key === 'd' && direction !== 'LEFT') direction = 'RIGHT';
+    });
+
+    // 幸運方塊遊戲
+    const luckyCanvas = document.getElementById('luckyCanvas');
+    const luckyCtx = luckyCanvas.getContext('2d');
+    let luckyColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+    let luckyInterval;
+
+    function drawLuckyBlocks() {
+        for (let y = 0; y < luckyCanvas.height / 40; y++) {
+            for (let x = 0; x < luckyCanvas.width / 40; x++) {
+                luckyCtx.fillStyle = luckyColors[Math.floor(Math.random() * luckyColors.length)];
+                luckyCtx.fillRect(x * 40, y * 40, 40, 40);
+            }
+        }
+    }
+
+    function startLuckyGame() {
+        luckyInterval = setInterval(drawLuckyBlocks, 1000);
+    }
+
+    function stopLuckyGame() {
+        clearInterval(luckyInterval);
+    }
+
+    document.getElementById('startLucky').addEventListener('click', startLuckyGame);
+    document.getElementById('stopLucky').addEventListener('click', stopLuckyGame);
+
+    // 井字遊戲 (XOX)
+    const ticTacToeGrid = document.getElementById('ticTacToeGrid');
+    let ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+    let currentPlayer = 'X';
+
+    function checkWinner() {
+        const winningCombos = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+        for (let combo of winningCombos) {
+            const [a, b, c] = combo;
+            if (ticTacToeBoard[a] && ticTacToeBoard[a] === ticTacToeBoard[b] && ticTacToeBoard[a] === ticTacToeBoard[c]) {
+                return ticTacToeBoard[a];
+            }
+        }
+        return ticTacToeBoard.includes('') ? null : 'Draw';
+    }
+
+    function renderBoard() {
+        ticTacToeGrid.innerHTML = '';
+        ticTacToeBoard.forEach((value, index) => {
+            const cell = document.createElement('div');
+            cell.textContent = value;
+            cell.className = value ? `x o` : '';
+            cell.addEventListener('click', () => handleClick(index));
+            ticTacToeGrid.appendChild(cell);
+        });
+    }
+
+    function handleClick(index) {
+        if (!ticTacToeBoard[index]) {
+            ticTacToeBoard[index] = currentPlayer;
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            renderBoard();
+            const result = checkWinner();
+            if (result) {
+                document.getElementById('ticTacToeResult').textContent = result === 'Draw' ? '遊戲結束! 平局!' : `遊戲結束! 玩家 ${result} 勝利!`;
+                ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+                setTimeout(renderBoard, 1000);
+            }
+            if (currentPlayer === 'O') {
+                setTimeout(aiMove, 500);
+            }
+        }
+    }
+
+    function aiMove() {
+        const emptyIndexes = ticTacToeBoard.map((value, index) => value === '' ? index : null).filter(index => index !== null);
+        const move = emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
+        if (move !== undefined) {
+            ticTacToeBoard[move] = 'O';
+            currentPlayer = 'X';
+            renderBoard();
+            const result = checkWinner();
+            if (result) {
+                document.getElementById('ticTacToeResult').textContent = result === 'Draw' ? '遊戲結束! 平局!' : `遊戲結束! 玩家 ${result} 勝利!`;
+                ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+                setTimeout(renderBoard, 1000);
+            }
+        }
+    }
+
+    function startTicTacToeGame() {
+        ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+        currentPlayer = 'X';
+        renderBoard();
+        document.getElementById('ticTacToeResult').textContent = '';
+    }
+
+    function stopTicTacToeGame() {
+        document.getElementById('ticTacToeResult').textContent = '遊戲結束!';
+    }
+
+    document.getElementById('startTicTacToe').addEventListener('click', startTicTacToeGame);
+    document.getElementById('stopTicTacToe').addEventListener('click', stopTicTacToeGame);
+
+    // 踩地雷遊戲
+    const minesweeperGrid = document.getElementById('minesweeperGrid');
+    const minesweeperSize = 10;
+    let minesweeperBoard = [];
+    let minesweeperInterval;
+
+    function createMinesweeperBoard() {
+        minesweeperBoard = [];
+        for (let y = 0; y < minesweeperSize; y++) {
+            minesweeperBoard[y] = [];
+            for (let x = 0; x < minesweeperSize; x++) {
+                minesweeperBoard[y][x] = Math.random() < 0.2 ? 'M' : '0';
+            }
+        }
+        renderMinesweeperBoard();
+    }
+
+    function renderMinesweeperBoard() {
+        minesweeperGrid.innerHTML = '';
+        for (let y = 0; y < minesweeperSize; y++) {
+            for (let x = 0; x < minesweeperSize; x++) {
+                const cell = document.createElement('div');
+                cell.className = 'minesweeper-cell';
+                cell.addEventListener('click', () => handleMinesweeperClick(x, y));
+                minesweeperGrid.appendChild(cell);
+            }
+        }
+    }
+
+    function handleMinesweeperClick(x, y) {
+        const cell = minesweeperGrid.children[y * minesweeperSize + x];
+        if (minesweeperBoard[y][x] === 'M') {
+            cell.classList.add('mine');
+            document.getElementById('minesweeperResult').textContent = '遊戲結束! 你踩到地雷了!';
+            clearInterval(minesweeperInterval);
+        } else {
+            cell.classList.add('clicked');
+            document.getElementById('minesweeperResult').textContent = '你沒有踩到地雷!';
+        }
+    }
+
+    function startMinesweeperGame() {
+        createMinesweeperBoard();
+        document.getElementById('minesweeperResult').textContent = '';
+    }
+
+    function stopMinesweeperGame() {
+        document.getElementById('minesweeperResult').textContent = '遊戲結束!';
+        clearInterval(minesweeperInterval);
+    }
+
+    document.getElementById('startMinesweeper').addEventListener('click', startMinesweeperGame);
+    document.getElementById('stopMinesweeper').addEventListener('click', stopMinesweeperGame);
+</script>
+
+</body>
+</html>
