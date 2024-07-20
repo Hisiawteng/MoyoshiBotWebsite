@@ -156,6 +156,17 @@
             }
         }
     </style>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfvVBQqAAAAAEAGeB4yV4uFM7wTRNzeLHj3ylRO"></script>
+    <script>
+        function onSubmit(event) {
+            event.preventDefault();
+            grecaptcha.enterprise.ready(async () => {
+                const token = await grecaptcha.enterprise.execute('6LfvVBQqAAAAAEAGeB4yV4uFM7wTRNzeLHj3ylRO', { action: 'submit' });
+                document.getElementById('g-recaptcha-response').value = token;
+                document.getElementById('feedback-form').submit();
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="background-animation"></div>
@@ -164,7 +175,7 @@
         <p>
             我們非常重視您的意見！請填寫下面的表單來提交您的反饋。我們會仔細閱讀每一條建議，以便不斷改進。
         </p>
-        <form name="feedback" method="POST" action="https://owo.bunnyhost.top:50045/api/feedback">
+        <form id="feedback-form" name="feedback" method="POST" action="https://owo.bunnyhost.top:50045/api/feedback" onsubmit="onSubmit(event)">
             <input type="text" name="name" placeholder="您的姓名" required>
             <input type="email" name="email" placeholder="您的電子郵件" required>
             <select name="feedback_type" required>
@@ -176,11 +187,10 @@
                 <option value="usability">使用體驗</option>
             </select>
             <textarea name="feedback" rows="5" placeholder="您的反饋" required></textarea>
-            <div class="g-recaptcha" data-sitekey="6LfvVBQqAAAAAEAGeB4yV4uFM7wTRNzeLHj3ylRO"></div>
+            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
             <input type="file" name="attachment">
             <button type="submit">提交反饋</button>
         </form>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>
