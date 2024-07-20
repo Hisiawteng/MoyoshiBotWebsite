@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公告-MoyoshiBot官方網站</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #0f0f0f, #1a1a1a);
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 90%;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00ffcc, #00ccff);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        p {
+            line-height: 1.6;
+            font-size: 1.2em;
+        }
+        .announcement {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s ease-out;
+        }
+        .announcement.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>公告</h1>
+    <div class="announcement">
+        <h2>這個是一個很重要的公告</h2>
+        <p>因為我發現有很多錯誤都是沒有權限😭</p>
+        <p2>
+        ● 如果大家有邀 @MoyoshiBot  麻煩在重邀 因為 我忘記修改權限設置 或者 點擊bot的個人頁 那邊修改 謝謝!
+        </p2>
+    </div>    
+    <div class="announcement">
+        <h2>MoyoshiBot已上綫</h2>
+        <p>最後一次上綫09：30 7/19</p>
+    </div>
+    <div class="announcement">
+        <h2>網站更新</h2>
+        <p>最後一次更新
+        </p>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2024 MoyoshiBot. 保留所有權利。</p>
+</footer>
+<script>
+    document.addEventListener('scroll', function() {
+        const elements = document.querySelectorAll('.announcement');
+        elements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 100) {
+                el.classList.add('visible');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

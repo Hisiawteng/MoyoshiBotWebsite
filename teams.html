@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moyoshi 團隊成員</title>
+    <title>團隊成員-MoyoshiBot官方網站</title>
     <link href="https://cdn.discordapp.com/avatars/1230504709065015368/1b34996c087dfbcc288e208f5bb00415.png?size=1024" rel="icon" type="image/png">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: #0a0a0a;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
             color: #fff;
         }
 
         header {
-            background: #141414;
-            padding: 10px 20px;
+            background: #222;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         header h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 28px;
             color: #00ff7f;
+            animation: fadeIn 1s ease-in-out;
         }
 
         nav a {
@@ -34,6 +37,7 @@
             text-decoration: none;
             margin: 0 15px;
             font-size: 18px;
+            transition: color 0.3s;
         }
 
         nav a:hover {
@@ -43,60 +47,96 @@
         .section {
             padding: 60px 20px;
             text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section h2 {
             font-size: 36px;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
         }
 
-        .cards {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+        .section h2::after {
+            content: '';
+            width: 50%;
+            height: 3px;
+            background: #00ff7f;
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
         }
 
-        .card {
-            background: #141414;
-            margin: 15px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 300px;
+        .profile {
+            margin-bottom: 40px;
+            display: inline-block;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 200px;
+            transition: transform 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        .profile:hover {
+            transform: scale(1.1);
         }
 
-        .card img {
+        .profile img {
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             margin-bottom: 15px;
+            transition: transform 0.3s;
         }
 
-        .card h3 {
+        .profile:hover img {
+            transform: rotate(360deg);
+        }
+
+        .profile h3 {
             font-size: 24px;
             color: #00ff7f;
+            margin: 10px 0 5px;
         }
 
-        .card p {
+        .profile p {
             font-size: 16px;
+            color: #ddd;
         }
 
         footer {
-            background: #141414;
+            background: #222;
             padding: 20px;
             text-align: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
         }
 
         footer p {
             margin: 0;
             font-size: 14px;
+            color: #888;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -111,40 +151,71 @@
 
 <section id="創始人" class="section">
     <h2>創始人</h2>
-    <div class="cards">
-        <div class="card">
-            <img src="https://cdn.discordapp.com/avatars/856067319075307521/dc47fa0977cc7759df98a03d5a294ed6.png?size=1024" alt="創始人">
-            <h3>HisiawTeng</h3>
-            <p>MoyoshiBot的創始人也是現在的開發人員之一</p>
-        </div>
+    <div class="profile">
+        <img src="https://cdn.discordapp.com/avatars/856067319075307521/dc47fa0977cc7759df98a03d5a294ed6.png?size=1024" alt="創始人">
+        <h3>HisiawTeng</h3>
+        <p>MoyoshiBot的創始人</p>
     </div>
 </section>
 
 <section id="開發人員" class="section">
     <h2>開發人員</h2>
-    <div class="cards">
-        <div class="card">
-            <img src="https://cdn.discordapp.com/avatars/856067319075307521/dc47fa0977cc7759df98a03d5a294ed6.png?size=1024" alt="開發人員">
-            <h3>HisiawTeng</h3>
-            <p>MoyoshiBot的創始人也是現在的開發人員之一</p>
-        </div>
+    <div class="profile">
+        <img src="https://cdn.discordapp.com/avatars/856067319075307521/dc47fa0977cc7759df98a03d5a294ed6.png?size=1024" alt="開發人員">
+        <h3>HisiawTeng</h3>
+        <p>MoyoshiBot的創始人也是現在的開發人員之一</p>
+    </div>
+</section>
+
+<section id="網站開發人員" class="section">
+    <h2>網站開發人員</h2>
+    <div class="profile">
+        <img src="https://cdn.discordapp.com/avatars/856067319075307521/dc47fa0977cc7759df98a03d5a294ed6.png?size=1024" alt="網站開發人員">
+        <h3>Hisiawteng</h3>
+        <p>主要網站開發人員</p>
+    </div>
+    <div class="profile">
+        <img src="https://cdn.discordapp.com/avatars/986164134225780746/df04817ac6bce6a3d28767fa0dde134c.png?size=1024" alt="網站設計師">
+        <h3>PL lyver</h3>
+        <p>網站設計師</p>
     </div>
 </section>
 
 <section id="美編" class="section">
     <h2>美編</h2>
-    <div class="cards">
-        <div class="card">
-            <img src="https://cdn.discordapp.com/avatars/973146538257833984/c2878a398570ea99c51d218e05d18145.png?size=1024" alt="美編">
-            <h3>旺旺仔</h3>
-            <p>機器人 美化設計</p>
-        </div>
+    <div class="profile">
+        <img src="https://cdn.discordapp.com/avatars/973146538257833984/c2878a398570ea99c51d218e05d18145.png?size=1024" alt="美編">
+        <h3>旺旺仔</h3>
+        <p>機器人美化設計</p>
     </div>
 </section>
 
 <footer>
     <p>&copy; 2024 MoyoshiBot. 保留所有權利。</p>
 </footer>
+
+<script>
+    const sections = document.querySelectorAll('.section');
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, options);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+</script>
 
 </body>
 </html>
