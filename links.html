@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相關鏈接-MoyoshiBot官方網站</title>
+    <link href="https://cdn.discordapp.com/avatars/1230504709065015368/1b34996c087dfbcc288e208f5bb00415.png?size=1024" rel="icon" type="image/png">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #e0e0e0;
+            background: #1a1a1a;
+            overflow: auto; /* 確保 body 可以滾動 */
+        }
+        .container {
+            position: relative;
+            width: 80%;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            animation: fadeIn 2s ease-in-out;
+        }
+        h1 {
+            text-align: center;
+            color: #00ffff;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: textPulse 2s infinite alternate;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 1rem;
+            color: #1a1a1a;
+            background: #00ffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+        .button:hover {
+            background: #00cccc;
+            transform: scale(1.05);
+        }
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(0, 0, 0, 0.4));
+            animation: backgroundSweep 5s linear infinite;
+            z-index: -1;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes textPulse {
+            0% {
+                text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+            }
+            100% {
+                text-shadow: 0 0 30px rgba(0, 255, 255, 1);
+            }
+        }
+        @keyframes backgroundSweep {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <h1>🚀 <span class="highlight">MoyoshiBot 相關鏈接</span> 🚀</h1>
+        <p>歡迎來到 MoyoshiBot 的相關鏈接頁面！這裡您可以找到所有有關 MoyoshiBot 的重要鏈接，方便您快速訪問。</p>
+        
+        <p><strong>邀請 MoyoshiBot 加入您的伺服器：</strong></p>
+        <a href="https://discord.com/oauth2/authorize?client_id=1230504709065015368&scope=bot%20applications.commands&permissions=2146958847" class="button">🔗 邀請 MoyoshiBot</a>
+        
+        <p><strong>加入 MoyoshiBot 官方伺服器：</strong></p>
+        <a href="https://discord.com/invite/Q9m9xv3Tc9" class="button">🔗 加入官方伺服器</a>
+        
+        <p><strong>訪問我們的網站：</strong></p>
+        <a href="https://example.com" class="button">🔗 MoyoshiBot 網站</a>
+        
+        <p><strong>查看我們的 GitHub 頁面：</strong></p>
+        <a href="https://github.com/your-repo" class="button">🔗 MoyoshiBot GitHub</a>
+        
+        <p><strong>了解更多關於我們：</strong></p>
+        <a href="https://example.com/about" class="button">🔗 關於我們</a>
+    </div>
+    <footer>
+        <p>&copy; 2024 MoyoshiBot. 保留所有權利。</p>
+    </footer>
+    
+</body>
+</html>

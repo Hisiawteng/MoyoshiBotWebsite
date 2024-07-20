@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關於我們-MoyoshiBot官方網站</title>
+    <link href="https://cdn.discordapp.com/avatars/1230504709065015368/1b34996c087dfbcc288e208f5bb00415.png?size=1024" rel="icon" type="image/png">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #e0e0e0;
+            background: #0f0f0f;
+            overflow: auto;
+        }
+        .container {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            animation: fadeIn 2s ease-in-out;
+            overflow: auto; /* 確保容器內部內容可滾動 */
+        }
+        h1 {
+            text-align: center;
+            color: #00ff99;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: textGlow 1.5s infinite alternate;
+        }
+        h2 {
+            color: #00ff99;
+            margin-top: 1rem;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 1rem;
+            color: #0f0f0f;
+            background: #00ff99;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .button:hover {
+            background: #00cc7a;
+            transform: scale(1.05);
+        }
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 255, 153, 0.2) 0%, transparent 70%);
+            animation: backgroundPulse 4s infinite;
+            z-index: -1;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(0, 255, 153, 0.8);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(0, 255, 153, 1);
+            }
+        }
+        @keyframes backgroundPulse {
+            0% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 0.3;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <h1>🎉 <span class="highlight">MoyoshiBot 上線啦！</span> 🎉</h1>
+        <p>大家好，我們很高興向大家介紹我們的新成員 —— <strong>MoyoshiBot</strong>！ 🐯</p>
+        <p><strong>MoyoshiBot</strong> 是一個多功能且強大的 Discord 機器人，專為提升伺服器的互動性和管理效率而設計。無論是新手還是老手，MoyoshiBot 都能夠滿足您的需求。</p>
+        
+        <h2>✨ 主要功能 ✨</h2>
+        <ul>
+            <li><strong>📈 經驗值系統</strong> - 互動聊天即可獲取經驗值，積累經驗值可以升級，展示您在伺服器中的活躍程度！</li>
+            <li><strong>👤 用戶資訊</strong> - 輸入 <code>/userinfo</code> 指令即可查看成員的詳細資料，包括用戶名、ID、經驗值、等級等。</li>
+            <li><strong>🏠 伺服器資訊</strong> - 想了解伺服器的各項數據嗎？使用 <code>/serverinfo</code> 指令，一鍵查看伺服器名稱、成員數量、創建日期等重要資訊。</li>
+            <li><strong>📜 幫助選單</strong> - 忘記某個指令怎麼用？使用 <code>/cmd</code> 指令查看所有可用指令及其功能介紹。</li>
+            <li><strong>⏱ 延遲檢測</strong> - 想知道機器人的反應速度嗎？輸入 <code>/ping</code> 即可顯示機器人的當前延遲，確保您獲得最佳的使用體驗。</li>
+            <li><strong>💬 歡迎與離開通知</strong> - 當新成員加入或成員離開伺服器時，MoyoshiBot 會自動發送通知，讓大家第一時間獲知成員動態。</li>
+        </ul>
+
+        <p><strong>✨ 更多精彩功能等你來發現！</strong></p>
+        <p>立即加入我們的伺服器，體驗 MoyoshiBot 帶來的高效管理和樂趣互動！如果您有任何問題或建議，請隨時聯繫我們的管理員，我們將竭誠為您服務。</p>
+
+        <a href="https://discord.com/oauth2/authorize?client_id=1230504709065015368&scope=bot%20applications.commands&permissions=2146958847" class="button">🔗 點擊這裡邀請 MoyoshiBot 加入您的伺服器</a>
+        <a href="https://discord.com/invite/Q9m9xv3Tc9" class="button">🔗 點擊這裏加入 MoyoshiBot 官方伺服器！</a>
+        <p><strong>🌟 MoyoshiBot - 您的 Discord 管理好幫手！</strong></p>
+    </div>
+    <footer>
+        <p>&copy; 2024 MoyoshiBot. 保留所有權利。</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支持我們 - MoyoshiBot</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #e0e0e0;
+            background: #0f0f0f;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            position: relative;
+            width: 80%;
+            max-width: 1000px;
+            padding: 2rem;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+            overflow: hidden;
+            animation: fadeIn 2s ease-in-out;
+        }
+        h1 {
+            text-align: center;
+            color: #00ffff;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            animation: textGlow 2s infinite alternate;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 1rem;
+            color: #1a
+            color: #1a1a1a;
+            background: #00ffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+            position: relative;
+            z-index: 1;
+        }
+        .button:hover {
+            background: #00cccc;
+            transform: scale(1.05);
+        }
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.2), rgba(0, 0, 0, 0.5));
+            animation: backgroundPulse 6s infinite alternate;
+            z-index: 0;
+        }
+        .background-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1), transparent);
+            animation: ripple 5s infinite;
+            z-index: 0;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            }
+            100% {
+                text-shadow: 0 0 40px rgba(0, 255, 255, 1);
+            }
+        }
+        @keyframes backgroundPulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 0.4;
+            }
+        }
+        @keyframes ripple {
+            0% {
+                transform: scale(0.5);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <h1>🚀 支持我們 🚀</h1>
+        <p>
+            感謝您對 MoyoshiBot 的支持！您的幫助對我們至關重要，讓我們能夠持續改進並添加更多功能。我們有多種方式讓您可以支持我們，無論是通過捐贈、參與我們的社區，還是關注我們的社交媒體。
+        </p>
+        <p>
+            <strong>您可以通過以下方式支持我們：</strong>
+        </p>
+        <a href="https://www.patreon.com/your-patreon" class="button">⭐ 支持我們的 Patreon</a>
+        <a href="https://ko-fi.com/your-kofi" class="button">☕ 贊助一杯咖啡</a>
+        <a href="https://discord.com/invite/Q9m9xv3Tc9" class="button">👥 加入我們的 Discord 社區</a>
+        <a href="https://github.com/your-repo" class="button">🌟 參與我們的 GitHub</a>
+        <a href="https://example.com/feedback" class="button">💬 提供您的反饋</a>
+    </div>
+</body>
+</html>
