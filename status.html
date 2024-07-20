@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord 機器人狀態</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1f1f1f, #282828);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .status-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .bot-status {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+        .status {
+            font-size: 1.2em;
+        }
+        .details {
+            font-size: 1em;
+            margin-top: 10px;
+        }
+        .details div {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-container">
+        <h1>Discord 機器人狀態</h1>
+        <div id="bot1-status" class="bot-status">
+            <div class="status">機器人 1 狀態: 加載中...</div>
+            <div class="details" id="bot1-details"></div>
+        </div>
+        <div id="bot2-status" class="bot-status">
+            <div class="status">機器人 2 狀態: 加載中...</div>
+            <div class="details" id="bot2-details"></div>
+        </div>
+        <div id="server-status" class="bot-status">
+            <div class="status">伺服器狀態: 加載中...</div>
+            <div class="details" id="server-details"></div>
+        </div>
+        <div id="user-count" class="bot-status">
+            <div class="status">在線用戶: 加載中...</div>
+        </div>
+    </div>
+    <script>
+        async function fetchStatus() {
+            try {
+                const response = await fetch('http://owo.bunnyhost.top:50045/api/status');
+                const data = await response.json();
+                
+                document.getElementById('bot1-status').querySelector('.status').innerText = `機器人 1 狀態: ${data.bot1.status}`;
+                document.getElementById('bot1-details').innerHTML = `
+                    <div>CPU 使用率: ${data.bot1.cpu_usage}%</div>
+                    <div>記憶體使用率: ${data.bot1.memory_usage}%</div>
+                    <div>上線時間: ${data.bot1.uptime}</div>
+                    <div>用戶數: ${data.bot1.user_count}</div>
+                `;
+                
+                document.getElementById('bot2-status').querySelector('.status').innerText = `機器人 2 狀態: ${data.bot2.status}`;
+                document.getElementById('bot2-details').innerHTML = `
+                    <div>CPU 使用率: ${data.bot2.cpu_usage}%</div>
+                    <div>記憶體使用率: ${data.bot2.memory_usage}%</div>
+                    <div>上線時間: ${data.bot2.uptime}</div>
+                    <div>用戶數: ${data.bot2.user_count}</div>
+                `;
+                
+                document.getElementById('server-status').querySelector('.status').innerText = `伺服器狀態: ${data.server.status}`;
+                document.getElementById('server-details').innerHTML = `
+                    <div>CPU 使用率: ${data.server.cpu_usage}%</div>
+                    <div>記憶體使用率: ${data.server.memory_usage}%</div>
+                    <div>上線時間: ${data.server.uptime}</div>
+                `;
+
+                document.getElementById('user-count').querySelector('.status').innerText = `在線用戶: ${data.online_users}`;
+            } catch (error) {
+                document.getElementById('bot1-status').querySelector('.status').innerText = '機器人 1 狀態: 無法獲取';
+                document.getElementById('bot2-status').querySelector('.status').innerText = '機器人 2 狀態: 無法獲取';
+                document.getElementById('server-status').querySelector('.status').innerText = '伺服器狀態: 無法獲取';
+                document.getElementById('user-count').querySelector('.status').innerText = '在線用戶: 無法獲取';
+            }
+        }
+
+        fetchStatus();
+        setInterval(fetchStatus, 60000); // 每分鐘更新一次
+    </script>
+</body>
+</html>
