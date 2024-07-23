@@ -5,256 +5,315 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoyoshiBot官方網站</title>
     <link href="https://cdn.discordapp.com/avatars/1230504709065015368/1b34996c087dfbcc288e208f5bb00415.png?size=1024" rel="icon" type="image/png">
-<style>    
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #111;
-        margin: 0;
-        padding: 0;
-        color: #fff;
-    }
-    .navbar {
-        width: 100%;
-        background-color: #333;
-        padding: 10px 40px;
-        margin: 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        box-sizing: border-box;
-    }
-    @keyframes colorChange {
-        0% {
-            background-position: 0% 50%;
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            margin: 0;
+            padding: 0;
+            color: #fff;
         }
-        50% {
-            background-position: 100% 50%;
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            padding: 10px 40px;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            position: relative;
         }
-        100% {
-            background-position: 0% 50%;
+        .menu-toggle {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
         }
-    }
-    .navbar h1 span {
-        background: linear-gradient(to right, #00ff99, #0033cc);
-        background-size: 200% 100%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: colorChange 5s ease infinite;
-        display: inline;
-        text-shadow: 0 0 2px rgba(0, 255, 255, 0.253), 0 0 5px rgba(0, 255, 255, 0.13);
-    }
-    .nav-links {
-        display: flex;
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-    .nav-links li {
-        position: relative;
-        margin-left: 20px;
-    }
-    .nav-links a {
-        text-decoration: none;
-        color: #fff; /* 改為白色 */
-        font-size: 1.2em;
-        padding: 10px 15px; /* 縮小內邊距 */
-        display: block;
-        transition: color 0.3s, background 0.3s, transform 0.3s;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
-        border-radius: 5px;
-        text-shadow: 0 0 2px rgba(0, 255, 255, 0.253), 0 0 5px rgba(0, 255, 255, 0.13);
-    }
-    .nav-links a:hover {
-        background: linear-gradient(90deg, rgba(0, 255, 255, 0.3), rgba(0, 255, 255, 0.1));
-        color: #00ff99;
-        transform: scale(1.1);
-    }
-    .nav-links a::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        width: 0;
-        height: 1px; /* 縮小邊框高度 */
-        background: #00ff99;
-        transition: width 0.3s ease;
-    }
-    .nav-links a:hover::after {
-        width: 100%;
-        left: 0;
-    }
-    .main-content {
-        text-align: center;
-        margin: 50px auto;
-    }
-    .main-content h1 {
-        font-size: 2.5em;
-        color: #fff;
-    }
-    .main-content p {
-        font-size: 1.2em;
-        color: #ddd;
-    }
-    .container {
-        background-color: #222;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        max-width: 1200px;
-        margin: 20px auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-    .feature {
-        background: #363636;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin: 10px;
-        width: calc(33.333% - 20px);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        opacity: 0;
-        transform: translateY(50%);
-    }
-    .feature:hover {
-        transform: translateY(0);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-    .feature-title {
-        font-size: 1.5em;
-        color: #00ff99;
-        margin-bottom: 10px;
-    }
-    .feature-description {
-        color: #ddd;
-    }
-    .feature:nth-child(odd) {
-        background: #414141;
-    }
-    .feature:nth-child(even) {
-        background: #4e4e4e;
-    }
-    @keyframes fadeIn {
-        from {
+        @keyframes colorChange {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .navbar h1 span {
+            background: linear-gradient(to right, #00ff99, #0033cc);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: colorChange 5s ease infinite;
+            display: inline;
+            text-shadow: 0 0 2px rgba(0, 255, 255, 0.253), 0 0 5px rgba(0, 255, 255, 0.13);
+        }
+        .nav-links {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-links li {
+            position: relative;
+            margin-left: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            padding: 10px 15px;
+            display: block;
+            transition: color 0.3s, background 0.3s, transform 0.3s;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
+            border-radius: 5px;
+            text-shadow: 0 0 2px rgba(0, 255, 255, 0.253), 0 0 5px rgba(0, 255, 255, 0.13);
+        }
+        .nav-links a:hover {
+            background: linear-gradient(90deg, rgba(0, 255, 255, 0.3), rgba(0, 255, 255, 0.1));
+            color: #00ff99;
+            transform: scale(1.1);
+        }
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: #00ff99;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        .main-content {
+            text-align: center;
+            margin: 50px auto;
+        }
+        .main-content h1 {
+            font-size: 2.5em;
+            color: #fff;
+        }
+        .main-content p {
+            font-size: 1.2em;
+            color: #ddd;
+        }
+        .container {
+            background-color: #222;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .feature {
+            background: #363636;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            width: calc(33.333% - 20px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(50%);
         }
-        to {
-            opacity: 1;
+        .feature:hover {
             transform: translateY(0);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-    }
-    .container .feature {
-        animation: fadeIn 0.5s ease-out forwards;
-    }
-    .container3 {
-        background-color: #222;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        max-width: 800px;
-        width: 100%;
-        text-align: center;
-        margin: 20px auto;
-    }
-    .container3 h2 {
-        color: #00ff99;
-    }
-    .container3 p {
-        color: #ddd;
-    }
-    .footer {
-        text-align: center;
-        margin-top: 20px;
-        font-size: 0.9em;
-        color: #666;
-    }
-    h3 a {    
-        text-decoration: none;
-        list-style-type: none;
-        font-size: 1.2em;
-        transition: color 0.3s;
-        color: #fff; /* 改為白色 */
-    }
-    h3 a:hover {
-        text-decoration: underline;
-        color: #00ff99; /* 懸停時顏色 */
-    }
-    h3 a:visited {
-        color: #fff; /* 已訪問的鏈接顏色 */
-    }
-    .main-content h1 span, .main-content h2 span, h2 span {
-        background: linear-gradient(to right, #00ff99, #0033cc);
-        background-size: 200% 100%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: colorChange 5s ease infinite;
-        display: inline;
-        text-shadow: 0 0 4px rgba(0, 255, 255, 0.329), 0 0 10px rgba(0, 255, 255, 0.192);
-    }
-    @keyframes slideIn {
-        from {
-            transform: translateY(100%);
-            opacity: 0;
+        .feature-title {
+            font-size: 1.5em;
+            color: #00ff99;
+            margin-bottom: 10px;
         }
-        to {
-            transform: translateY(0);
-            opacity: 1;
+        .feature-description {
+            color: #ddd;
         }
-    }
-    .container2 {
-        margin: 10px 0; /* 增加上下邊距 */
-        background-color: #222;
-        padding: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 50px;
-        width: 100%;
-        text-align: center;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        max-width: 800px;
-        margin: auto;
-    }
-    .container2 h2, .container2 h3 {
-        color: #00ff99;
-        margin: 0;
-    }
-    .container2 section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex: 1;
-        min-width: 20px;
-        margin: 10px;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        background: #333;
-        animation: slideIn 0.5s ease-out;
-    }
-    .container2 section h3 a {
-        color: #fff; /* 改為白色 */
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-    .container2 section h3 a:hover {
-        color: #f8fc00; /* 懸停時顏色 */
-    }
-    .footer {
-        background-color: #333;
-        padding: 10px;
-        color: #aaa;
-    }
-</style>    
+        .feature:nth-child(odd) {
+            background: #414141;
+        }
+        .feature:nth-child(even) {
+            background: #4e4e4e;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .container .feature {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .container3 {
+            background-color: #222;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            margin: 20px auto;
+        }
+        .container3 h2 {
+            color: #00ff99;
+        }
+        .container3 p {
+            color: #ddd;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+            background-color: #333;
+            padding: 10px;
+        }
+        h3 a {
+            text-decoration: none;
+            list-style-type: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+            color: #fff;
+        }
+        h3 a:hover {
+            text-decoration: underline;
+            color: #00ff99;
+        }
+        h3 a:visited {
+            color: #fff;
+        }
+        .main-content h1 span, .main-content h2 span, h2 span {
+            background: linear-gradient(to right, #00ff99, #0033cc);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: colorChange 5s ease infinite;
+            display: inline;
+            text-shadow: 0 0 4px rgba(0, 255, 255, 0.329), 0 0 10px rgba(0, 255, 255, 0.192);
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .container2 {
+            margin: 10px 0;
+            background-color: #222;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 800px;
+            margin: auto;
+        }
+        .container2 h2, .container2 h3 {
+            color: #00ff99;
+            margin: 0;
+        }
+        .container2 section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            min-width: 20px;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: #333;
+            animation: slideIn 0.5s ease-out;
+        }
+        .container2 section h3 a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .container2 section h3 a:hover {
+            color: #f8fc00;
+        }
+        /* 針對手機版的樣式 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                padding: 0;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .navbar h1 {
+                margin-bottom: 10px;
+            }
+            .navbar h1 a {
+                font-size: 1.5em;
+            }
+            .nav-links li {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+            .nav-links a {
+                font-size: 1.2em;
+                padding: 10px;
+                background: none;
+                text-shadow: none;
+            }
+            .main-content h1 {
+                font-size: 2em;
+            }
+            .main-content p {
+                font-size: 1em;
+            }
+            .feature {
+                width: calc(100% - 20px);
+            }
+            .container2 {
+                flex-direction: column;
+            }
+            .container2 section {
+                width: 100%;
+            }
+            .footer {
+                font-size: 0.8em;
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="navbar">
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <h1><a href="/"><span>MoyoshiBot官網</span></a></h1>
         <ul class="nav-links">
             <li><a href="cooperation">合作</a></li>
@@ -325,5 +384,11 @@
     <div class="footer">
         <p>&copy; 2024 MoyoshiBot. All rights reserved.</p>
     </div>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('show');
+        }
+    </script>
 </body>
 </html>
