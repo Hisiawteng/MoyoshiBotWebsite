@@ -7,246 +7,300 @@
     <link href="https://cdn.discordapp.com/avatars/1230504709065015368/1b34996c087dfbcc288e208f5bb00415.png?size=1024" rel="icon" type="image/png">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #111;
             margin: 0;
             padding: 0;
-            background: #111;
-            color: #ddd;
+            color: #fff;
         }
-
-        header {
-            background: linear-gradient(90deg, #1e1e1e, #333);
-            padding: 15px 30px;
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            padding: 10px 40px; /* 增加垂直內邊距 */
+            margin: 0;  /* 移除邊距以使其貼近邊緣 */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #444;
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box; /* 包括內邊距和邊框在元素的總寬度和高度中 */
         }
-
-        header h1 {
+        @keyframes colorChange {
+            0% {
+                background-position: 0% 50%; /* 漸變起始位置 */
+            }
+            50% {
+                background-position: 100% 50%; /* 漸變中間位置 */
+            }
+            100% {
+                background-position: 0% 50%; /* 漸變結束位置 */
+            }
+        }
+        .navbar h1 span {
+            background: linear-gradient(to right, #00ff99, #0033cc); /* 漸變顏色 */
+            background-size: 200% 100%; /* 使背景顯示完整漸變 */
+            -webkit-background-clip: text; /* WebKit 瀏覽器的前綴屬性 */
+            background-clip: text; /* 標準屬性 */
+            -webkit-text-fill-color: transparent; /* 使文字顏色透明 */
+            animation: colorChange 5s ease infinite; /* 動畫設置 */
+            display: inline; /* 確保 `background-clip` 生效 */
+            text-shadow: 0 0 2px rgba(0, 255, 255, 0.253), 0 0 5px rgba(0, 255, 255, 0.13); /* 更柔和的發光效果 */
+        }
+        .nav-links {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
             margin: 0;
-            font-size: 28px;
+        }
+        .nav-links li {
+            margin-left: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
             color: #00ff99;
         }
-
-        nav a {
-            color: #ddd;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            position: relative;
-        }
-
-        nav a::after {
-            content: '';
-            display: block;
-            height: 3px;
-            background: #00ff99;
-            position: absolute;
-            left: 0;
-            bottom: -5px;
-            width: 0;
-            transition: width 0.3s;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            height: 70vh;
-            background: url('https://source.unsplash.com/random/1920x1080') no-repeat center center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .main-content {
             text-align: center;
+            margin: 50px auto;
+        }
+        .main-content h1 {
+            font-size: 2.5em;
             color: #fff;
         }
-
-        .hero h2 {
-            font-size: 48px;
-            margin: 0;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        .main-content p {
+            font-size: 1.2em;
+            color: #ddd;
         }
-
-        .hero p {
-            font-size: 24px;
-            margin-top: 10px;
-        }
-
-        .section {
-            padding: 60px 30px;
-            text-align: center;
-            background: #1c1c1c;
-        }
-
-        .section h2 {
-            font-size: 36px;
-            color: #00ff99;
-            margin-bottom: 20px;
-        }
-
-        .section p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        .cards {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .card {
-            background: #333;
+        .container {
+            background-color: #222;
             padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 1200px; /* 扩大容器宽度 */
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap; /* 允许换行 */
+            justify-content: space-around; /* 水平均匀分布 */
+        }
+        .feature {
+            background: #363636;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            width: 300px;
-            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            width: calc(33.333% - 20px); /* 三列布局 */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(50%);
         }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        .feature:hover {
+            transform: translateY(0);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-
-        .card h3 {
-            font-size: 24px;
+        .feature-title {
+            font-size: 1.5em;
             color: #00ff99;
             margin-bottom: 10px;
         }
-
-        .card p {
-            font-size: 16px;
+        .feature-description {
             color: #ddd;
         }
-
-        footer {
-            background: #111;
+        .feature:nth-child(odd) {
+            background: #414141;
+        }
+        .feature:nth-child(even) {
+            background: #4e4e4e;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .container .feature {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .container3 {
+            background-color: #222;
             padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 800px;
+            width: 100%;
             text-align: center;
-            border-top: 1px solid #444;
+            margin: 20px auto;
         }
-
-        footer p {
+        .container3 h2 {
+            color: #00ff99;
+        }
+        .container3 p {
+            color: #ddd;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        h3 a {    
+            text-decoration: none;
+            list-style-type: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+            color: #d0d0d0; /* 白色帶點灰 */
+        }
+        h3 a:hover {
+            text-decoration: underline;
+            color: #a0a0a0; /* 滑鼠懸停時的顏色，灰色更多 */
+        }
+        h3 a:visited {
+            color: #d0d0d0; /* 訪問後顏色保持不變 */
+        }
+        .main-content h1 span, .main-content h2 span, h2 span {
+            background: linear-gradient(to right, #00ff99, #0033cc); /* 漸變顏色 */
+            background-size: 200% 100%; /* 使背景顯示完整漸變 */
+            -webkit-background-clip: text; /* WebKit 瀏覽器的前綴屬性 */
+            background-clip: text; /* 標準屬性 */
+            -webkit-text-fill-color: transparent; /* 使文字顏色透明 */
+            animation: colorChange 5s ease infinite; /* 動畫設置 */
+            display: inline; /* 確保 `background-clip` 生效 */
+            text-shadow: 0 0 4px rgba(0, 255, 255, 0.329), 0 0 10px rgba(0, 255, 255, 0.192); /* 更柔和的發光效果 */
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .container2 {
+            margin: 20px 0;
+            background-color: #222;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap; /* 允許換行 */
+            justify-content: space-around; /* 水平均勻分佈 */
+            max-width: 800px;
+            margin: auto;
+        }
+        .container2 h2, .container2 h3 {
+            color: #00ff99;
             margin: 0;
-            font-size: 14px;
-            color: #888;
         }
-
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            nav {
-                margin-top: 10px;
-            }
-
-            .hero h2 {
-                font-size: 36px;
-            }
-
-            .hero p {
-                font-size: 18px;
-            }
-
-            .section {
-                padding: 30px 15px;
-            }
-
-            .section h2 {
-                font-size: 28px;
-            }
-
-            .section p {
-                font-size: 16px;
-            }
-
-            .cards {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .card {
-                width: 90%;
-            }
+        .container2 section {
+            display: flex;
+            flex-direction: column; /* 使 h2 和 h3 垂直排列 */
+            align-items: center; /* 中心對齊 */
+            flex: 1;
+            min-width: 200px; /* 每個 section 最小寬度 */
+            margin: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: #333;
+            animation: slideIn 0.5s ease-out;
+        }
+        .container2 section h3 a {
+            color: #00ff99; /* 鏈接顏色 */
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .container2 section h3 a:hover {
+            color: #fff; /* 滑鼠懸停顏色 */
+        }
+        .footer {
+            background-color: #333;
+            padding: 10px;
+            color: #aaa;
         }
     </style>
 </head>
 <body>
-
-<header>
-    <h1>MoyoshiBot</h1>
-    <nav>
-        <a href="https://moyoshibot.netlify.app/cooperation">合作</a>
-        <a href="features">功能</a>
-        <a href="support-us">支持我們</a>
-        <a href="related-links">相關鏈接</a>
-        <a href="about-us">關於我們</a>
-        <a href="https://moyoshibot.netlify.app/teams">MoyoshiBot團隊成員</a>
-        <a href="https://moyoshibot.netlify.app/PRIVACYPOLICY">隱私政策</a>
-        <a href="https://moyoshibot.netlify.app/tos">服務條款</a>
-    </nav>
-</header>
-
-<section class="hero">
-    <div>
-        <h2>探索 Moyoshi Bot</h2>
-        <p>引領潮流的 Discord 機器人技術</p>
+    <div class="navbar">
+        <h1><a href="/"><span>MoyoshiBot官網</span></a></h1>
+        <ul class="nav-links">
+            <li><a href="cooperation">合作</a></li>
+            <li><a href="features">功能</a></li>
+            <li><a href="support">支持我們</a></li>
+            <li><a href="links">相關鏈接</a></li>
+            <li><a href="about">關於我們</a></li>
+            <li><a href="teams">團隊成員</a></li>
+        </ul>
     </div>
-</section>
-
-<section id="cooperation" class="section">
-    <h2>合作</h2>
-    <p>我們開放合作機會，歡迎與各種項目合作，提供技術支持和解決方案。聯繫我們，探索更多合作可能性。</p>
-</section>
-
-<section id="features" class="section">
-    <h2>功能</h2>
-    <div class="cards">
-        <div class="card">
-            <h3>創新功能</h3>
-            <p>我們的機器人提供獨特且強大的功能，滿足各種需求。</p>
+    <div class="main-content">
+        <h1><span>歡迎來到MoyoshiBot官網</span></h1>
+        <p>我們提供各種功能，讓您的伺服器更有趣。</p>
+    </div>
+    <div class="container">
+        <div class="feature">
+            <div class="feature-title">經驗系統</div>
+            <div class="feature-description">提升用戶互動經驗值。</div>
         </div>
-        <div class="card">
-            <h3>用戶友好</h3>
-            <p>界面直觀，操作簡便，提升用戶體驗。</p>
+        <div class="feature">
+            <div class="feature-title">音樂</div>
+            <div class="feature-description">播放您最喜愛的音樂。</div>
         </div>
-        <div class="card">
-            <h3>高效能</h3>
-            <p>優化設計，能快速處理大量請求。</p>
+        <div class="feature">
+            <div class="feature-title">管理</div>
+            <div class="feature-description">輕鬆管理您的伺服器。</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">客服 (待製作)</div>
+            <div class="feature-description">即將推出。</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">金錢系統</div>
+            <div class="feature-description">虛擬貨幣管理。</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">小遊戲</div>
+            <div class="feature-description">有趣的小遊戲讓您娛樂無限。</div>
+        </div>
+        <div class="feature">
+            <div class="feature-title">全部指令</div>
+            <div class="feature-description"><a href="command.html">點擊這裡查看所有指令</a></div>
         </div>
     </div>
-</section>
-
-<section id="support-us" class="section">
-    <h2>支持我們</h2>
-    <p>您的支持對我們非常重要。您可以通過捐款、反饋或分享來支持我們。</p>
-</section>
-
-<section id="related-links" class="section">
-    <h2>相關鏈接</h2>
-    <p>探索與我們相關的有用鏈接：</p>
-    <ul>
-        <li><a href="#" style="color: #00ff99;">官方網站</a></li>
-        <li><a href="#" style="color: #00ff99;">GitHub</a></li>
-        <li><a href="#" style="color: #00ff99;">Discord社群</a></li>
-    </ul>
-</section>
-
-<section id="about-us" class="section">
-    <h2>關於我們</h2>
-    <p>Moyoshi Bot 是一個專注於提供創新且高效能的 Discord 機器人服務的團隊。我們致力於開發前沿技術，為用戶帶來無與倫比的體驗。</p>
-</section>
-
-<footer>
-    <p>&copy; 2024 Moyoshi Bot. 保留所有權利。</p>
-</footer>
-
+    <div class="container3">
+        <h2>支援我們</h2>
+        <h2>您的支持對我們非常重要。您可以通過捐款、反饋或分享來支持我們。</h2>
+        <h3><a href="https://moyoshibot.netlify.app/suppot">贊助鏈接</a></h3>
+    </div>
+    <div class="container2">
+        <div class="section">
+            <h2>聯絡我們</h2>
+            <h3><a href="https://discord.com/invite/Q9m9xv3Tc9">Discord官方群組/支援全組</a></h3>
+        </div>
+        <div class="section">
+            <h2>關於我們</h2>
+            <h3><a href="https://moyoshibot.netlify.app/teams">開發人員</a></h3>
+            <h3><a href="https://moyoshibot.netlify.app/teams">銘謝清單</a></h3>
+        </div>
+        <div class="section">
+            <h2>文檔</h2>
+            <h3><a href="https://moyoshibot.netlify.app/PRIVACYPOLICY">隱私政策</a></h3>
+            <h3><a href="https://moyoshibot.netlify.app/tos">服務條款</a></h3>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 MoyoshiBot. All rights reserved.</p>
+    </div>
 </body>
 </html>
