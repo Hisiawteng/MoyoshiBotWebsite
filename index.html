@@ -5,232 +5,253 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoyoshiBot官方網站</title>
     <link href="https://cdn.discordapp.com/avatars/1230504709065015368/1b34996c087dfbcc288e208f5bb00415.png?size=1024" rel="icon" type="image/png">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #111;
-            margin: 0;
-            padding: 0;
-            color: #fff;
+<style>    
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #111;
+        margin: 0;
+        padding: 0;
+        color: #fff;
+    }
+    .navbar {
+        width: 100%;
+        background-color: #333;
+        padding: 10px 40px;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+    }
+    @keyframes colorChange {
+        0% {
+            background-position: 0% 50%;
         }
-        .navbar {
-            width: 100%;
-            background-color: #333;
-            padding: 10px 40px; /* 增加垂直內邊距 */
-            margin: 0;  /* 移除邊距以使其貼近邊緣 */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box; /* 包括內邊距和邊框在元素的總寬度和高度中 */
+        50% {
+            background-position: 100% 50%;
         }
-        @keyframes colorChange {
-            0% {
-                background-position: 0% 50%; /* 漸變起始位置 */
-            }
-            50% {
-                background-position: 100% 50%; /* 漸變中間位置 */
-            }
-            100% {
-                background-position: 0% 50%; /* 漸變結束位置 */
-            }
+        100% {
+            background-position: 0% 50%;
         }
-        .navbar h1 span {
-            background: linear-gradient(to right, #00ff99, #0033cc); /* 漸變顏色 */
-            background-size: 200% 100%; /* 使背景顯示完整漸變 */
-            -webkit-background-clip: text; /* WebKit 瀏覽器的前綴屬性 */
-            background-clip: text; /* 標準屬性 */
-            -webkit-text-fill-color: transparent; /* 使文字顏色透明 */
-            animation: colorChange 5s ease infinite; /* 動畫設置 */
-            display: inline; /* 確保 `background-clip` 生效 */
-            text-shadow: 0 0 2px rgba(0, 255, 255, 0.253), 0 0 5px rgba(0, 255, 255, 0.13); /* 更柔和的發光效果 */
-        }
-        .nav-links {
-            display: flex;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .nav-links li {
-            margin-left: 20px;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1.2em;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            text-decoration: underline;
-            color: #00ff99;
-        }
-        .main-content {
-            text-align: center;
-            margin: 50px auto;
-        }
-        .main-content h1 {
-            font-size: 2.5em;
-            color: #fff;
-        }
-        .main-content p {
-            font-size: 1.2em;
-            color: #ddd;
-        }
-        .container {
-            background-color: #222;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            max-width: 1200px; /* 扩大容器宽度 */
-            margin: 20px auto;
-            display: flex;
-            flex-wrap: wrap; /* 允许换行 */
-            justify-content: space-around; /* 水平均匀分布 */
-        }
-        .feature {
-            background: #363636;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin: 10px;
-            width: calc(33.333% - 20px); /* 三列布局 */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .navbar h1 span {
+        background: linear-gradient(to right, #00ff99, #0033cc);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: colorChange 5s ease infinite;
+        display: inline;
+        text-shadow: 0 0 2px rgba(0, 255, 255, 0.253), 0 0 5px rgba(0, 255, 255, 0.13);
+    }
+    .nav-links {
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    .nav-links li {
+        position: relative;
+        margin-left: 20px;
+    }
+    .nav-links a {
+        text-decoration: none;
+        color: #fff; /* 改為白色 */
+        font-size: 1.2em;
+        padding: 10px 15px; /* 縮小內邊距 */
+        display: block;
+        transition: color 0.3s, background 0.3s, transform 0.3s;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
+        border-radius: 5px;
+        text-shadow: 0 0 2px rgba(0, 255, 255, 0.253), 0 0 5px rgba(0, 255, 255, 0.13);
+    }
+    .nav-links a:hover {
+        background: linear-gradient(90deg, rgba(0, 255, 255, 0.3), rgba(0, 255, 255, 0.1));
+        color: #00ff99;
+        transform: scale(1.1);
+    }
+    .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 0;
+        height: 1px; /* 縮小邊框高度 */
+        background: #00ff99;
+        transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after {
+        width: 100%;
+        left: 0;
+    }
+    .main-content {
+        text-align: center;
+        margin: 50px auto;
+    }
+    .main-content h1 {
+        font-size: 2.5em;
+        color: #fff;
+    }
+    .main-content p {
+        font-size: 1.2em;
+        color: #ddd;
+    }
+    .container {
+        background-color: #222;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        max-width: 1200px;
+        margin: 20px auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .feature {
+        background: #363636;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 10px;
+        width: calc(33.333% - 20px);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        opacity: 0;
+        transform: translateY(50%);
+    }
+    .feature:hover {
+        transform: translateY(0);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .feature-title {
+        font-size: 1.5em;
+        color: #00ff99;
+        margin-bottom: 10px;
+    }
+    .feature-description {
+        color: #ddd;
+    }
+    .feature:nth-child(odd) {
+        background: #414141;
+    }
+    .feature:nth-child(even) {
+        background: #4e4e4e;
+    }
+    @keyframes fadeIn {
+        from {
             opacity: 0;
-            transform: translateY(50%);
+            transform: translateY(20px);
         }
-        .feature:hover {
+        to {
+            opacity: 1;
             transform: translateY(0);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-        .feature-title {
-            font-size: 1.5em;
-            color: #00ff99;
-            margin-bottom: 10px;
+    }
+    .container .feature {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+    .container3 {
+        background-color: #222;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        max-width: 800px;
+        width: 100%;
+        text-align: center;
+        margin: 20px auto;
+    }
+    .container3 h2 {
+        color: #00ff99;
+    }
+    .container3 p {
+        color: #ddd;
+    }
+    .footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9em;
+        color: #666;
+    }
+    h3 a {    
+        text-decoration: none;
+        list-style-type: none;
+        font-size: 1.2em;
+        transition: color 0.3s;
+        color: #fff; /* 改為白色 */
+    }
+    h3 a:hover {
+        text-decoration: underline;
+        color: #00ff99; /* 懸停時顏色 */
+    }
+    h3 a:visited {
+        color: #fff; /* 已訪問的鏈接顏色 */
+    }
+    .main-content h1 span, .main-content h2 span, h2 span {
+        background: linear-gradient(to right, #00ff99, #0033cc);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: colorChange 5s ease infinite;
+        display: inline;
+        text-shadow: 0 0 4px rgba(0, 255, 255, 0.329), 0 0 10px rgba(0, 255, 255, 0.192);
+    }
+    @keyframes slideIn {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
         }
-        .feature-description {
-            color: #ddd;
+        to {
+            transform: translateY(0);
+            opacity: 1;
         }
-        .feature:nth-child(odd) {
-            background: #414141;
-        }
-        .feature:nth-child(even) {
-            background: #4e4e4e;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .container .feature {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        .container3 {
-            background-color: #222;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-            margin: 20px auto;
-        }
-        .container3 h2 {
-            color: #00ff99;
-        }
-        .container3 p {
-            color: #ddd;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: #666;
-        }
-        h3 a {    
-            text-decoration: none;
-            list-style-type: none;
-            font-size: 1.2em;
-            transition: color 0.3s;
-            color: #d0d0d0; /* 白色帶點灰 */
-        }
-        h3 a:hover {
-            text-decoration: underline;
-            color: #a0a0a0; /* 滑鼠懸停時的顏色，灰色更多 */
-        }
-        h3 a:visited {
-            color: #d0d0d0; /* 訪問後顏色保持不變 */
-        }
-        .main-content h1 span, .main-content h2 span, h2 span {
-            background: linear-gradient(to right, #00ff99, #0033cc); /* 漸變顏色 */
-            background-size: 200% 100%; /* 使背景顯示完整漸變 */
-            -webkit-background-clip: text; /* WebKit 瀏覽器的前綴屬性 */
-            background-clip: text; /* 標準屬性 */
-            -webkit-text-fill-color: transparent; /* 使文字顏色透明 */
-            animation: colorChange 5s ease infinite; /* 動畫設置 */
-            display: inline; /* 確保 `background-clip` 生效 */
-            text-shadow: 0 0 4px rgba(0, 255, 255, 0.329), 0 0 10px rgba(0, 255, 255, 0.192); /* 更柔和的發光效果 */
-        }
-        @keyframes slideIn {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        .container2 {
-            margin: 20px 0;
-            background-color: #222;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            width: 100%;
-            text-align: center;
-            display: flex;
-            flex-wrap: wrap; /* 允許換行 */
-            justify-content: space-around; /* 水平均勻分佈 */
-            max-width: 800px;
-            margin: auto;
-        }
-        .container2 h2, .container2 h3 {
-            color: #00ff99;
-            margin: 0;
-        }
-        .container2 section {
-            display: flex;
-            flex-direction: column; /* 使 h2 和 h3 垂直排列 */
-            align-items: center; /* 中心對齊 */
-            flex: 1;
-            min-width: 200px; /* 每個 section 最小寬度 */
-            margin: 10px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background: #333;
-            animation: slideIn 0.5s ease-out;
-        }
-        .container2 section h3 a {
-            color: #00ff99; /* 鏈接顏色 */
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .container2 section h3 a:hover {
-            color: #fff; /* 滑鼠懸停顏色 */
-        }
-        .footer {
-            background-color: #333;
-            padding: 10px;
-            color: #aaa;
-        }
-    </style>
+    }
+    .container2 {
+        margin: 10px 0; /* 增加上下邊距 */
+        background-color: #222;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 50px;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-width: 800px;
+        margin: auto;
+    }
+    .container2 h2, .container2 h3 {
+        color: #00ff99;
+        margin: 0;
+    }
+    .container2 section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        min-width: 20px;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background: #333;
+        animation: slideIn 0.5s ease-out;
+    }
+    .container2 section h3 a {
+        color: #fff; /* 改為白色 */
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .container2 section h3 a:hover {
+        color: #f8fc00; /* 懸停時顏色 */
+    }
+    .footer {
+        background-color: #333;
+        padding: 10px;
+        color: #aaa;
+    }
+</style>    
 </head>
 <body>
     <div class="navbar">
@@ -278,26 +299,28 @@
             <div class="feature-description"><a href="command.html">點擊這裡查看所有指令</a></div>
         </div>
     </div>
-    <div class="container3">
-        <h2>支援我們</h2>
-        <h2>您的支持對我們非常重要。您可以通過捐款、反饋或分享來支持我們。</h2>
-        <h3><a href="https://moyoshibot.netlify.app/suppot">贊助鏈接</a></h3>
+    <div class="container2">
+        <section>
+            <h2>支援我們</h2>
+            <h3>您的支持對我們非常重要。您可以通過捐款、反饋或分享來支持我們。</h3>
+            <h3><a href="https://moyoshibot.netlify.app/suppot">贊助鏈接</a></h3>
+        </section>
     </div>
     <div class="container2">
-        <div class="section">
+        <section>
             <h2>聯絡我們</h2>
             <h3><a href="https://discord.com/invite/Q9m9xv3Tc9">Discord官方群組/支援全組</a></h3>
-        </div>
-        <div class="section">
+        </section>
+        <section>
             <h2>關於我們</h2>
             <h3><a href="https://moyoshibot.netlify.app/teams">開發人員</a></h3>
             <h3><a href="https://moyoshibot.netlify.app/teams">銘謝清單</a></h3>
-        </div>
-        <div class="section">
+        </section>
+        <section>
             <h2>文檔</h2>
             <h3><a href="https://moyoshibot.netlify.app/PRIVACYPOLICY">隱私政策</a></h3>
             <h3><a href="https://moyoshibot.netlify.app/tos">服務條款</a></h3>
-        </div>
+        </section>
     </div>
     <div class="footer">
         <p>&copy; 2024 MoyoshiBot. All rights reserved.</p>
