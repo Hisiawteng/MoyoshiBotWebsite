@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用教學</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #f5f5f5;
+            background: #0d1117;
+            overflow-x: hidden;
+            transition: margin-left 0.3s ease;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 250px;
+            background: #161b22;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.7);
+            overflow-y: auto; /* Add scrollbar to sidebar */
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+            scrollbar-width: thin;
+            scrollbar-color: #00aaff #0d1117; /* Style scrollbar color */
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 12px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #00aaff;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #0088cc;
+        }
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+        .sidebar:hover {
+            width: 320px;
+            background-color: #1f232a;
+            transform: translateX(0);
+        }
+        .sidebar h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #00aaff;
+            text-shadow: 0 0 15px rgba(0, 153, 255, 0.9);
+            border-bottom: 3px solid #00aaff;
+            padding-bottom: 10px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 15px 0;
+            position: relative;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #f5f5f5;
+            font-size: 1.2em;
+            position: relative;
+            transition: color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar ul li a::after {
+            content: '';
+            display: block;
+            height: 2px;
+            background: #00aaff;
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            transition: width 0.3s;
+        }
+        .sidebar ul li a:hover {
+            color: #00aaff;
+            transform: translateX(5px);
+        }
+        .sidebar ul li a:hover::after {
+            width: 100%;
+        }
+        .sidebar .nested {
+            display: none;
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 2px solid #00aaff;
+        }
+        .sidebar .nested.active {
+            display: block;
+        }
+        .sidebar .expand {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .sidebar .expand svg {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+        .sidebar .expand.active svg {
+            transform: rotate(180deg);
+        }
+        .content {
+            flex: 1;
+            padding: 30px;
+            margin-left: 250px; /* Match the width of the sidebar */
+            overflow-y: auto;
+            background: radial-gradient(circle, #0d1117 0%, #161b22 100%);
+            box-shadow: inset 0 0 20px rgba(0, 153, 255, 0.5);
+            position: relative;
+            scrollbar-width: thin;
+            scrollbar-color: #00aaff #0d1117; /* Style scrollbar color */
+            transition: margin-left 0.3s ease;
+        }
+        .content::-webkit-scrollbar {
+            width: 12px;
+        }
+        .content::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+        .content::-webkit-scrollbar-thumb {
+            background: #00aaff;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .content::-webkit-scrollbar-thumb:hover {
+            background: #0088cc;
+        }
+        .footer {
+            background: #161b22;
+            color: #f5f5f5;
+            text-align: center;
+            padding: 15px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 153, 255, 0.7);
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+            }
+            .content {
+                padding: 20px;
+                margin-left: 0;
+            }
+            .footer {
+                position: relative;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <h2>目錄</h2>
+            <ul>
+                <li>
+                    <div class="expand" id="setup-toggle">
+                        <a href="#setup">設置</a>
+                        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.293 5.293a1 1 0 0 1 1.414 0L8 7.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-3 3a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 0-1.414z" fill="#00aaff"/>
+                        </svg>
+                    </div>
+                    <ul class="nested">
+                        <li><a href="">設置步驟 1</a></li>
+                        <li><a href="">設置步驟 2</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="expand" id="configuration-toggle">
+                        <a href="#configuration">配置</a>
+                        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.293 5.293a1 1 0 0 1 1.414 0L8 7.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-3 3a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 0-1.414z" fill="#00aaff"/>
+                        </svg>
+                    </div>
+                    <ul class="nested">
+                        <li><a href="">配置選項 1</a></li>
+                        <li><a href="">配置選項 2</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="expand" id="testing-toggle">
+                        <a href="#testing">測試</a>
+                        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.293 5.293a1 1 0 0 1 1.414 0L8 7.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-3 3a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 0-1.414z" fill="#00aaff"/>
+                        </svg>
+                    </div>
+                    <ul class="nested">
+                        <li><a href="">測試方法 1</a></li>
+                        <li><a href="">測試方法 2</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="content" id="content">
+            <h1>使用教學</h1>
+            <section id="setup">
+                <h2>步驟 1: 設置</h2>
+                <p>請先確保你已經安裝了相關的工具和軟件，並且設置好你的開發環境。</p>
+            </section>
+            <section id="configuration">
+                <h2>步驟 2: 配置</h2>
+                <p>根據我們的指導文檔，配置你的設定檔案，以確保所有參數正確無誤。</p>
+            </section>
+            <section id="testing">
+                <h2>步驟 3: 測試</h2>
+                <p>在完成設置和配置後，請進行測試以確保一切正常運行。</p>
+            </section>
+        </div>
+    </div>
+    <div class="footer">
+        © 2024 MoyoshiBot. All rights reserved.
+    </div>
+    <script>
+        let sidebar = document.getElementById('sidebar');
+        let content = document.getElementById('content');
+        let hideSidebarTimeout;
+        let sidebarWidth = 300; // Initial width of the sidebar
+
+        function showSidebar() {
+            sidebar.classList.remove('hidden');
+            content.style.marginLeft = `${sidebarWidth}px`;
+            clearTimeout(hideSidebarTimeout);
+            hideSidebarTimeout = setTimeout(() => {
+                sidebar.classList.add('hidden');
+                content.style.marginLeft = '0'; // Expand content to fill the screen
+            }, 10000);
+        }
+
+        function checkMousePosition(event) {
+            if (event.clientX < 10) { // Mouse is near the left edge
+                sidebar.classList.remove('hidden');
+                content.style.marginLeft = `${sidebarWidth}px`;
+            }
+        }
+
+        document.body.addEventListener('mousemove', showSidebar);
+        document.body.addEventListener('mousemove', checkMousePosition);
+
+        sidebar.addEventListener('mouseenter', () => {
+            sidebar.classList.remove('hidden');
+            content.style.marginLeft = `${sidebarWidth}px`;
+        });
+
+        sidebar.addEventListener('mouseleave', () => {
+            hideSidebarTimeout = setTimeout(() => {
+                sidebar.classList.add('hidden');
+                content.style.marginLeft = '0'; // Expand content to fill the screen
+            }, 10000);
+        });
+
+        // Initial hiding of the sidebar
+        hideSidebarTimeout = setTimeout(() => {
+            sidebar.classList.add('hidden');
+            content.style.marginLeft = '0'; // Expand content to fill the screen
+        }, 10000);
+
+        // JavaScript for toggling nested menu
+        document.querySelectorAll('.sidebar .expand').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
+                let nestedMenu = this.nextElementSibling;
+                if (nestedMenu && nestedMenu.classList.contains('nested')) {
+                    this.classList.toggle('active');
+                    nestedMenu.classList.toggle('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
